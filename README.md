@@ -22,4 +22,4 @@ The first line should contain the name of the data contained, the second line sh
 > 
 > 6.0
 
-This is how two (2) vector of three (3) elements of type double (11) would be represented inside the file.
+This is how two (2) vectors of three (3) elements of type double (11) would be represented inside the file.
