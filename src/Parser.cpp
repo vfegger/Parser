@@ -20,6 +20,27 @@ Parser::Parser(unsigned length_in)
     count_Out = 0u;
 }
 
+Parser::Parser(const Parser &parser_in)
+{
+    length_In = parser_in.length_In;
+    length_Out = parser_in.length_Out;
+    fileArray_In = new std::ifstream[length_In];
+    fileArray_Out = new std::ofstream[length_Out];
+    count_In = 0u;
+    count_Out = 0u;
+}
+
+Parser &Parser::operator=(const Parser &parser_in)
+{
+    length_In = parser_in.length_In;
+    length_Out = parser_in.length_Out;
+    fileArray_In = new std::ifstream[length_In];
+    fileArray_Out = new std::ofstream[length_Out];
+    count_In = 0u;
+    count_Out = 0u;
+    return *this;
+}
+
 void Parser::ImportConfiguration(std::ifstream &file_in, std::string &name_out, unsigned &length_out, ParserType &type_out, unsigned &iteration_out)
 {
     char aux[100];
@@ -56,55 +77,55 @@ void Parser::ImportValues(std::ifstream &file_in, unsigned length_in, ParserType
     switch (type_in)
     {
     case ParserType::Char:
-        values_out = new char[length_in];
+        values_out = new char[length_in]();
         ImportValues<char>(file_in, length_in, values_out);
         break;
     case ParserType::UChar:
-        values_out = new unsigned char[length_in];
+        values_out = new unsigned char[length_in]();
         ImportValues<unsigned char>(file_in, length_in, values_out);
         break;
     case ParserType::SInt:
-        values_out = new short int[length_in];
+        values_out = new short int[length_in]();
         ImportValues<short int>(file_in, length_in, values_out);
         break;
     case ParserType::SUInt:
-        values_out = new short unsigned int[length_in];
+        values_out = new short unsigned int[length_in]();
         ImportValues<short unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::Int:
-        values_out = new int[length_in];
+        values_out = new int[length_in]();
         ImportValues<int>(file_in, length_in, values_out);
         break;
     case ParserType::UInt:
-        values_out = new unsigned int[length_in];
+        values_out = new unsigned int[length_in]();
         ImportValues<unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::LInt:
-        values_out = new long int[length_in];
+        values_out = new long int[length_in]();
         ImportValues<long int>(file_in, length_in, values_out);
         break;
     case ParserType::LUInt:
-        values_out = new long unsigned int[length_in];
+        values_out = new long unsigned int[length_in]();
         ImportValues<long unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::LLInt:
-        values_out = new long long int[length_in];
+        values_out = new long long int[length_in]();
         ImportValues<long long int>(file_in, length_in, values_out);
         break;
     case ParserType::LLUInt:
-        values_out = new long long unsigned int[length_in];
+        values_out = new long long unsigned int[length_in]();
         ImportValues<long long unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::Float:
-        values_out = new float[length_in];
+        values_out = new float[length_in]();
         ImportValues<float>(file_in, length_in, values_out);
         break;
     case ParserType::Double:
-        values_out = new double[length_in];
+        values_out = new double[length_in]();
         ImportValues<double>(file_in, length_in, values_out);
         break;
     case ParserType::LDouble:
-        values_out = new long double[length_in];
+        values_out = new long double[length_in]();
         ImportValues<long double>(file_in, length_in, values_out);
         break;
     default:
@@ -171,55 +192,55 @@ void Parser::ImportAllValues(std::ifstream &file_in, unsigned length_in, ParserT
     switch (type_in)
     {
     case ParserType::Char:
-        values_out = new char[size];
+        values_out = new char[size]();
         ImportValues<char>(file_in, size, values_out);
         break;
     case ParserType::UChar:
-        values_out = new unsigned char[size];
+        values_out = new unsigned char[size]();
         ImportValues<unsigned char>(file_in, size, values_out);
         break;
     case ParserType::SInt:
-        values_out = new short int[size];
+        values_out = new short int[size]();
         ImportValues<short int>(file_in, size, values_out);
         break;
     case ParserType::SUInt:
-        values_out = new short unsigned int[size];
+        values_out = new short unsigned int[size]();
         ImportValues<short unsigned int>(file_in, size, values_out);
         break;
     case ParserType::Int:
-        values_out = new int[size];
+        values_out = new int[size]();
         ImportValues<int>(file_in, size, values_out);
         break;
     case ParserType::UInt:
-        values_out = new unsigned int[size];
+        values_out = new unsigned int[size]();
         ImportValues<unsigned int>(file_in, size, values_out);
         break;
     case ParserType::LInt:
-        values_out = new long int[size];
+        values_out = new long int[size]();
         ImportValues<long int>(file_in, size, values_out);
         break;
     case ParserType::LUInt:
-        values_out = new long unsigned int[size];
+        values_out = new long unsigned int[size]();
         ImportValues<long unsigned int>(file_in, size, values_out);
         break;
     case ParserType::LLInt:
-        values_out = new long long int[size];
+        values_out = new long long int[size]();
         ImportValues<long long int>(file_in, size, values_out);
         break;
     case ParserType::LLUInt:
-        values_out = new long long unsigned int[size];
+        values_out = new long long unsigned int[size]();
         ImportValues<long long unsigned int>(file_in, size, values_out);
         break;
     case ParserType::Float:
-        values_out = new float[size];
+        values_out = new float[size]();
         ImportValues<float>(file_in, size, values_out);
         break;
     case ParserType::Double:
-        values_out = new double[size];
+        values_out = new double[size]();
         ImportValues<double>(file_in, size, values_out);
         break;
     case ParserType::LDouble:
-        values_out = new long double[size];
+        values_out = new long double[size]();
         ImportValues<long double>(file_in, size, values_out);
         break;
     default:
@@ -282,10 +303,10 @@ void Parser::ExportAllValues(std::ofstream &file_in, unsigned length_in, ParserT
 
 void Parser::ImportConfigurationBinary(std::ifstream &file_in, std::string &name_out, unsigned &length_out, ParserType &type_out, unsigned &iteration_out)
 {
-    unsigned type;
-    unsigned size;
+    unsigned type = 0u;
+    unsigned size = 0u;
     file_in.read((char *)(&size), sizeof(unsigned));
-    char *aux = new char[size];
+    char *aux = new(std::nothrow) char[size]();
     file_in.read(aux, sizeof(char) * size);
     file_in.read((char *)(&length_out), sizeof(unsigned));
     file_in.read((char *)(&(type)), sizeof(unsigned));
@@ -315,55 +336,55 @@ void Parser::ImportValuesBinary(std::ifstream &file_in, unsigned length_in, Pars
     switch (type_in)
     {
     case ParserType::Char:
-        values_out = new char[length_in];
+        values_out = new char[length_in]();
         ImportValuesBinary<char>(file_in, length_in, values_out);
         break;
     case ParserType::UChar:
-        values_out = new unsigned char[length_in];
+        values_out = new unsigned char[length_in]();
         ImportValuesBinary<unsigned char>(file_in, length_in, values_out);
         break;
     case ParserType::SInt:
-        values_out = new short int[length_in];
+        values_out = new short int[length_in]();
         ImportValuesBinary<short int>(file_in, length_in, values_out);
         break;
     case ParserType::SUInt:
-        values_out = new short unsigned int[length_in];
+        values_out = new short unsigned int[length_in]();
         ImportValuesBinary<short unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::Int:
-        values_out = new int[length_in];
+        values_out = new int[length_in]();
         ImportValuesBinary<int>(file_in, length_in, values_out);
         break;
     case ParserType::UInt:
-        values_out = new unsigned int[length_in];
+        values_out = new unsigned int[length_in]();
         ImportValuesBinary<unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::LInt:
-        values_out = new long int[length_in];
+        values_out = new long int[length_in]();
         ImportValuesBinary<long int>(file_in, length_in, values_out);
         break;
     case ParserType::LUInt:
-        values_out = new long unsigned int[length_in];
+        values_out = new long unsigned int[length_in]();
         ImportValuesBinary<long unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::LLInt:
-        values_out = new long long int[length_in];
+        values_out = new long long int[length_in]();
         ImportValuesBinary<long long int>(file_in, length_in, values_out);
         break;
     case ParserType::LLUInt:
-        values_out = new long long unsigned int[length_in];
+        values_out = new long long unsigned int[length_in]();
         ImportValuesBinary<long long unsigned int>(file_in, length_in, values_out);
         break;
     case ParserType::Float:
-        values_out = new float[length_in];
+        values_out = new float[length_in]();
         ImportValuesBinary<float>(file_in, length_in, values_out);
         break;
     case ParserType::Double:
-        values_out = new double[length_in];
+        values_out = new double[length_in]();
         ImportValuesBinary<double>(file_in, length_in, values_out);
         break;
     case ParserType::LDouble:
-        values_out = new long double[length_in];
+        values_out = new long double[length_in]();
         ImportValuesBinary<long double>(file_in, length_in, values_out);
         break;
     default:
@@ -430,55 +451,55 @@ void Parser::ImportAllValuesBinary(std::ifstream &file_in, unsigned length_in, P
     switch (type_in)
     {
     case ParserType::Char:
-        values_out = new char[size];
+        values_out = new char[size]();
         ImportValuesBinary<char>(file_in, size, values_out);
         break;
     case ParserType::UChar:
-        values_out = new unsigned char[size];
+        values_out = new unsigned char[size]();
         ImportValuesBinary<unsigned char>(file_in, size, values_out);
         break;
     case ParserType::SInt:
-        values_out = new short int[size];
+        values_out = new short int[size]();
         ImportValuesBinary<short int>(file_in, size, values_out);
         break;
     case ParserType::SUInt:
-        values_out = new short unsigned int[size];
+        values_out = new short unsigned int[size]();
         ImportValuesBinary<short unsigned int>(file_in, size, values_out);
         break;
     case ParserType::Int:
-        values_out = new int[size];
+        values_out = new int[size]();
         ImportValuesBinary<int>(file_in, size, values_out);
         break;
     case ParserType::UInt:
-        values_out = new unsigned int[size];
+        values_out = new unsigned int[size]();
         ImportValuesBinary<unsigned int>(file_in, size, values_out);
         break;
     case ParserType::LInt:
-        values_out = new long int[size];
+        values_out = new long int[size]();
         ImportValuesBinary<long int>(file_in, size, values_out);
         break;
     case ParserType::LUInt:
-        values_out = new long unsigned int[size];
+        values_out = new long unsigned int[size]();
         ImportValuesBinary<long unsigned int>(file_in, size, values_out);
         break;
     case ParserType::LLInt:
-        values_out = new long long int[size];
+        values_out = new long long int[size]();
         ImportValuesBinary<long long int>(file_in, size, values_out);
         break;
     case ParserType::LLUInt:
-        values_out = new long long unsigned int[size];
+        values_out = new long long unsigned int[size]();
         ImportValuesBinary<long long unsigned int>(file_in, size, values_out);
         break;
     case ParserType::Float:
-        values_out = new float[size];
+        values_out = new float[size]();
         ImportValuesBinary<float>(file_in, size, values_out);
         break;
     case ParserType::Double:
-        values_out = new double[size];
+        values_out = new double[size]();
         ImportValuesBinary<double>(file_in, size, values_out);
         break;
     case ParserType::LDouble:
-        values_out = new long double[size];
+        values_out = new long double[size]();
         ImportValuesBinary<long double>(file_in, size, values_out);
         break;
     default:
@@ -593,7 +614,6 @@ void Parser::ConvertToBinary(std::string path_in, std::string path_out, std::str
     unsigned length;
     ParserType type;
     void *values;
-    unsigned sizeType;
     std::string name_in;
     std::string name_out;
     for (const auto &entry : std::filesystem::directory_iterator(path_in))
@@ -626,7 +646,6 @@ void Parser::ConvertToText(std::string path_in, std::string path_out, std::strin
     unsigned length;
     ParserType type;
     void *values;
-    unsigned sizeType;
     std::string name_in;
     std::string name_out;
     for (const auto &entry : std::filesystem::directory_iterator(path_in))
@@ -639,6 +658,7 @@ void Parser::ConvertToText(std::string path_in, std::string path_out, std::strin
 
         std::streampos iterationPosition;
         unsigned iteration = 0u;
+        length = 0u;
 
         ImportConfigurationBinary(in, name, length, type, iteration);
         ImportAllValuesBinary(in, length, type, values, iteration);
