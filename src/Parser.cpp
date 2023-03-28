@@ -792,9 +792,11 @@ Parser::~Parser()
     if (fileArray_In != NULL)
     {
         delete[] fileArray_In;
+        fileArray_In = NULL;
     }
     if (fileArray_Out != NULL)
     {
         delete[] fileArray_Out;
+        fileArray_Out = NULL;
     }
 }
