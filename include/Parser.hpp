@@ -36,6 +36,11 @@ private:
     unsigned length_Out;
     unsigned count_Out;
 
+    template <typename T>
+    static void ImportValues(std::ifstream &file_in, unsigned length_in, void *&values_out);
+    template <typename T>
+    static void ExportValues(std::ofstream &file_in, unsigned length_in, void *values_in);
+
 public:
     Parser();
     Parser(unsigned length_in);
@@ -55,11 +60,6 @@ public:
 
     static void ImportConfiguration(std::ifstream &file_in, std::string &name_out, unsigned &length_out, ParserType &type_out, unsigned &iteration_out);
     static void ExportConfiguration(std::ofstream &file_in, std::string name_in, unsigned length_in, ParserType type_in, std::streampos &iterationPosition_out);
-
-    template <typename T>
-    static void ImportValues(std::ifstream &file_in, unsigned length_in, void *&values_out);
-    template <typename T>
-    static void ExportValues(std::ofstream &file_in, unsigned length_in, void *values_in);
 
     static void ImportValues(std::ifstream &file_in, unsigned length_in, ParserType type_in, void *&values_out, unsigned iteration_in = 0u);
     static void ExportValues(std::ofstream &file_in, unsigned length_in, ParserType type_in, void *values_in, std::streampos &iterationPosition_in, unsigned iteration_in = 0u);
